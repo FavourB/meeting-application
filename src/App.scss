@@ -1,0 +1,9 @@
+@import "./assests/styles/variables.scss";
+.App{
+  overflow-y: scroll;
+  overflow-x: hidden;
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: $light-blue;
+  }
+}
