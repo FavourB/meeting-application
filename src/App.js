@@ -20,13 +20,28 @@ class App extends Component {
 		};
 		this.deleteTodo = this.deleteTodo.bind(this);
 		this.deleteSubAgenda=this.deleteSubAgenda.bind(this);
+		this.addTodos=this.addTodos.bind(this)
 	}
 	
 	 addTodos(todo){
-		this.setState((state, props) => ({
-			todos: state.todos.push(todo)
-		  }));
+		 let temp= this.state.todos
+		 temp.push({id: temp.length+1,
+			name: todo.meetingTitle,
+			description: todo.meetingDescription,
+			date:todo.date,
+			startTime: todo.startTime,
+			EndTime:  todo.endTime,
+			agenda:todo.agenda
+				
 		
+		  
+			})
+	  
+		this.setState((state, props) => ({
+			todos: temp})
+			);
+		console.log(temp.length+1)
+		console.log(todo)
 		  return this.state.todos
 
 	}
@@ -62,7 +77,7 @@ class App extends Component {
 			<Router>
 			<div className="App">
 				<Usercontext.Provider   value={[this.state.todos,this.deleteTodo,
-				this.deleteSubAgenda
+				this.deleteSubAgenda,this.addTodos
              ]} >
 				<Row>
 					<Col xs={12}>

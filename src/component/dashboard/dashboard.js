@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import "./dashboard.scss"
 import { withStyles, createStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -202,7 +202,7 @@ function Row(props) {
                   {row.agenda.map((agendaRow) => (
                     <TableRow className={classes.root} key={agendaRow.id}>
                       <TableCell className={classes.root} component="th" scope="row" align="left"> 
-                        <p className={classes.agenda}>{agendaRow.subAgenda}</p>
+                        <p className={classes.agenda}>{agendaRow.agenda}</p>
                       </TableCell>
                       <TableCell className={classes.root} align="center" ><p className={classes.duration}>{agendaRow.duration}</p></TableCell>
                       <TableCell className={classes.root} align="left">
@@ -220,7 +220,7 @@ function Row(props) {
 }
 
 
-const row = getTodos();
+// const row = getTodos();
 
 export default function Dashboard() {
     const classes = useRowStyles();

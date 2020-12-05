@@ -97,7 +97,7 @@ const useStylesReddit2 = makeStyles((theme) => ({
 
 
 
-function Agenda()  {
+function Agenda({setAgenders})  {
     const classes=useStyles();
 
     const [inputList, setInputList] = useState([{
@@ -115,17 +115,22 @@ function Agenda()  {
 
     const handleAddAgenda = () =>{
        // first method
-      setInputList([...inputList, {agenda:"", agendaDuration:"07:30"}])
+      setInputList([...inputList, {agenda:"", agendaDuration:"07:30",id:inputList.length}])
       // or second method
       // const list = [...inputList];
       // list.push({agenda:"", agendaDuration:""});
       // setInputList(list);
+      //props.setAgenders([...inputList, {agenda:"", agendaDuration:"07:30"}])
     }
+React.useEffect(()=>{
+ setAgenders(inputList)
 
+},[inputList])
     const handleDeleteAgenda = index =>{
       const list = [...inputList];
       list.splice(index, 1);
       setInputList(list);
+     setAgenders(list)
     }
 
 

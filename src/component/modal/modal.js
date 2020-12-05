@@ -1,4 +1,4 @@
-import React, { useState, useEffect}from 'react';
+import React, { useState, useEffect,useContext}from 'react';
 import {fade,makeStyles, withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,7 +14,7 @@ import Fab from '@material-ui/core/Fab';
 import Agenda from './agenda';
 import Grid from '@material-ui/core/Grid';
 import Controls from './../control/control';
-
+import UserContext from '../../context/userContext'
 
 const styles = (theme) => ({
   root: {
@@ -172,10 +172,26 @@ const initialValues ={
 
 export default function AddMeeting() {
   const [open, setOpen] = React.useState(false);
- 
+  const [myTodos,deleteTodo,deleteSubAgenda,addNewTodo] = useContext(UserContext)
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const create = () => {
+    
+    let temp=values
+    temp.agenda=agenders
+    if(temp.meetingTitle==""){
+      alert("meeting title cannot be empty")
+      return;
+    }else if(
+      temp.meetingDescription==""){
+        alert("meeting discription cannot be empty")
+        return;
+      }
+    setOpen(false);
+    addNewTodo(temp)
+    console.log(agenders)
   };
   const [scroll, setScroll] = React.useState('paper');
 
@@ -200,12 +216,14 @@ export default function AddMeeting() {
   }, [open]);
 
    const [values, setValues] = useState(initialValues); 
+   const [agenders,setAgenders]=useState("")
    const handleInputChange = e => {
     const { name, value } = e.target
     setValues({
       ...values,
       [name]:value
     })
+    console.log(values)
    }
 
   return (
@@ -348,7 +366,7 @@ export default function AddMeeting() {
               value={values.automaticTimeCalculation}
               onChange = {handleInputChange}
               />
-              <Agenda/>
+              <Agenda setAgenders={setAgenders} />
             </Grid>
           </form>
           <pre>
@@ -356,7 +374,7 @@ export default function AddMeeting() {
         </pre>           
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} className={classes.savebutton} >
+          <Button autoFocus onClick={create} className={classes.savebutton} >
             Create
           </Button>
         </DialogActions>
