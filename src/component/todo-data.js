@@ -7,14 +7,14 @@ const todo = [
     EndTime:  "14:44",
     agenda:[
        { id:1,
-        subAgenda: 'Complete Dashboard UI for Todo Application',
+        subAgenda: 'Complete Dashboard UI for Todo Application1',
         duration: "12:34",},
 
         { id:2,
-            subAgenda: 'Complete Dashboard UI for Todo Application',
+            subAgenda: 'Complete Dashboard UI for Todo Application2',
             duration: "12:34",},
         { id:3,
-            subAgenda: 'Complete Dashboard UI for Todo Application',
+            subAgenda: 'Complete Dashboard UI for Todo Application3',
             duration: "12:34",},
     ]
         
@@ -64,10 +64,8 @@ const todo = [
 ]
 
 
- function getTodos(){
+export function getTodos(){
     return todo
 }
-function addTodos(){
-    return todo
-}
-export { getTodos, addTodos }
+
+// export { getTodos, addTodos,deleteTodo ,deleteSubAgenda}

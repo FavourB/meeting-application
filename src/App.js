@@ -52,7 +52,7 @@ class App extends Component {
 		current.agenda=temp
 		this.setState((state, props) => ({
 			
-			todos:rest.concat(current)
+			todos:rest.concat(current).sort((a,b)=>a.id>=b.id)
 		  }));
 		return todoId
 	}
