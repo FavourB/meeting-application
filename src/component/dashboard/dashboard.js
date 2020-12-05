@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import "./dashboard.scss"
 import { withStyles, createStyles, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -20,8 +20,10 @@ import  Fade  from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import AddMeeting from "../modal/modal"
 
+import UserContext from '../../context/userContext'
 
 const useRowStyles = makeStyles((theme)=>({
+
   root:{
     borderBottom:"1px solid rgba(224, 224, 224, .1)"
   },
@@ -161,7 +163,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
- 
+  const [myTodos,deleteTodo] = useContext(UserContext)
   return (
     <React.Fragment>
       <StyledTableRow >
@@ -180,7 +182,7 @@ function Row(props) {
         <StyledTableCell  align="right" justify="center"> 
           <div className="d-flex justify-content-between">
             <Avatar variant="rounded" className={classes.edit} size="small"> <EditIcon/></Avatar>
-            <Avatar variant="rounded" className={classes.delete} size="small" > <DeleteForeverIcon/></Avatar>
+            <Avatar variant="rounded" onClick={()=>deleteTodo(row.id)} className={classes.delete} size="small" > <DeleteForeverIcon/></Avatar>
           </div>
           </StyledTableCell>
        
@@ -221,7 +223,7 @@ const row = getTodos();
 
 export default function Dashboard() {
     const classes = useRowStyles();
-   
+    const [myTodos,deleteTodo] = useContext(UserContext)
   return (
     <div>
        <Paper elevation={0} className={classes.paper}>
@@ -239,12 +241,15 @@ export default function Dashboard() {
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {row.map((row) => (
+            {/* {row.map((row) => (
               <Row className={classes.root} key={row.name} row={row} />
-            ))}
+            ))} */}
+            {myTodos.map((row) => (
+              <Row className={classes.root} key={row.name} row={row} /> ))}
           </TableBody>
         </Table>
       </TableContainer>
+      
       </Paper>
       <AddMeeting/>  
     </div>

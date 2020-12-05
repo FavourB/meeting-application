@@ -10,16 +10,43 @@ import Account from './component/account/account'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import { getTodos } from './component/todo-data';
+import Usercontext from './context/userContext'
 
 class App extends Component {
-	state = { 
-		todos: getTodos()
-	};
+	constructor(props) {
+		super(props);
+		this.state = { 
+			todos: getTodos()
+		};
+		this.deleteTodo = this.deleteTodo.bind(this);
+	}
+	
+	 addTodos(todo){
+		this.setState((state, props) => ({
+			todos: state.todos.push(todo)
+		  }));
+		
+		  return this.state.todos
+
+	}
+	 deleteTodo(todoId){
+		this.setState((state, props) => ({
+			todos: state.todos.filter((val,i)=>{
+				return val.id!=todoId
+			})
+		  }));
+		return todoId
+	}
+	 deleteSubAgenda(todoId,id){
+		return todoId
+	}
 	render() {
 
 		return (
 			<Router>
 			<div className="App">
+				<Usercontext.Provider   value={[this.state.todos,this.deleteTodo
+             ]} >
 				<Row>
 					<Col xs={12}>
 						<Header />
@@ -42,7 +69,7 @@ class App extends Component {
 							
 					</Col>
 				</Row>
-				
+				</Usercontext.Provider>
 			</div></Router>
 		);
 	}

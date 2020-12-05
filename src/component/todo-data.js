@@ -63,6 +63,11 @@ const todo = [
     },
 ]
 
-export function getTodos(){
+
+ function getTodos(){
     return todo
 }
+function addTodos(){
+    return todo
+}
+export { getTodos, addTodos }
