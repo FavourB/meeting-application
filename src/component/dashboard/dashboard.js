@@ -163,7 +163,7 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
-  const [myTodos,deleteTodo] = useContext(UserContext)
+  const [myTodos,deleteTodo,deleteSubAgenda] = useContext(UserContext)
   return (
     <React.Fragment>
       <StyledTableRow >
@@ -205,7 +205,8 @@ function Row(props) {
                         <p className={classes.agenda}>{agendaRow.subAgenda}</p>
                       </TableCell>
                       <TableCell className={classes.root} align="center" ><p className={classes.duration}>{agendaRow.duration}</p></TableCell>
-                      <TableCell className={classes.root} align="left"><Button variant="contained" className={classes.delete} disableElevation>Delete</Button></TableCell>
+                      <TableCell className={classes.root} align="left">
+                        <Button onClick={()=>deleteSubAgenda(row.id,agendaRow.id)} variant="contained" className={classes.delete} disableElevation>Delete</Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody> 

@@ -19,6 +19,7 @@ class App extends Component {
 			todos: getTodos()
 		};
 		this.deleteTodo = this.deleteTodo.bind(this);
+		this.deleteSubAgenda=this.deleteSubAgenda.bind(this);
 	}
 	
 	 addTodos(todo){
@@ -38,6 +39,21 @@ class App extends Component {
 		return todoId
 	}
 	 deleteSubAgenda(todoId,id){
+		//  alert(todoId +id)
+		 let rest= this.state.todos.filter((val,i)=>{
+			return val.id!=todoId
+		})
+		 let current = this.state.todos.find((val,i)=>{
+			return val.id==todoId
+		})
+	let temp=current.agenda.filter((val,i)=>{
+			return val.id!=id
+		})
+		current.agenda=temp
+		this.setState((state, props) => ({
+			
+			todos:rest.concat(current)
+		  }));
 		return todoId
 	}
 	render() {
@@ -45,7 +61,8 @@ class App extends Component {
 		return (
 			<Router>
 			<div className="App">
-				<Usercontext.Provider   value={[this.state.todos,this.deleteTodo
+				<Usercontext.Provider   value={[this.state.todos,this.deleteTodo,
+				this.deleteSubAgenda
              ]} >
 				<Row>
 					<Col xs={12}>
